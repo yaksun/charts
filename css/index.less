@@ -11,6 +11,7 @@ header{
         text-align: center;
         height: 100%;
         line-height: 1rem;
+        font-size: .625rem;
     }
     span{
         position: absolute;
@@ -19,5 +20,71 @@ header{
         display: block;
         height: 1rem;
         line-height: 1rem;
+        font-size: .25rem;
+    }
+}
+
+.mainbox{
+    width: 100%;
+    display: flex;
+    padding:.125rem .125rem 0px;
+    .column{
+        flex:3;
+    }
+    .column:nth-child(2){
+        flex:5;
+    }
+    .panel{
+        position: relative;
+        height: 3.875rem;
+        background-color: aqua;
+        margin-bottom: .1875rem;
+        padding: .1875rem .1875rem 0;
+        &::before{
+            position: absolute;
+            content: "";
+            width: 10px;
+            height: 10px;
+            top:0;
+            left: 0;
+            border-top:2px solid green;
+            border-left:2px solid green;
+        }
+        &::after{
+            position: absolute;
+            content: "";
+            width: 10px;
+            height: 10px;
+            top:0;
+            right: 0;
+            border-top: 2px solid green;
+            border-right: 2px solid green;
+        }
+        .panel-footer{
+            position: absolute;
+            width: 100%;
+            bottom:0;
+            left:0;
+            &::before{
+                position: absolute;
+                content: "";
+                width: 10px;
+                height: 10px;
+                bottom:0;
+                left: 0;
+                border-bottom:2px solid green;
+                border-left:2px solid green;
+            }
+            &::after{
+                position: absolute;
+                content: "";
+                width: 10px;
+                height: 10px;
+                bottom:0;
+                right: 0;
+                border-bottom: 2px solid green;
+                border-right: 2px solid green;
+            }
+        }
     }
 }

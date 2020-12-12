@@ -12,6 +12,7 @@ header h1 {
   text-align: center;
   height: 100%;
   line-height: 1rem;
+  font-size: 0.625rem;
 }
 header span {
   position: absolute;
@@ -20,4 +21,69 @@ header span {
   display: block;
   height: 1rem;
   line-height: 1rem;
+  font-size: 0.25rem;
+}
+.mainbox {
+  width: 100%;
+  display: flex;
+  padding: 0.125rem 0.125rem 0px;
+}
+.mainbox .column {
+  flex: 3;
+}
+.mainbox .column:nth-child(2) {
+  flex: 5;
+}
+.mainbox .panel {
+  position: relative;
+  height: 3.875rem;
+  background-color: aqua;
+  margin-bottom: 0.1875rem;
+  padding: 0.1875rem 0.1875rem 0;
+}
+.mainbox .panel::before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  top: 0;
+  left: 0;
+  border-top: 2px solid green;
+  border-left: 2px solid green;
+}
+.mainbox .panel::after {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  top: 0;
+  right: 0;
+  border-top: 2px solid green;
+  border-right: 2px solid green;
+}
+.mainbox .panel .panel-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+.mainbox .panel .panel-footer::before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid green;
+  border-left: 2px solid green;
+}
+.mainbox .panel .panel-footer::after {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid green;
+  border-right: 2px solid green;
 }
