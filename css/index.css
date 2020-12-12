@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header {
+  height: 1rem;
+  background-color: pink;
+  position: relative;
+}
+header h1 {
+  text-align: center;
+  height: 100%;
+  line-height: 1rem;
+}
+header span {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+  display: block;
+  height: 1rem;
+  line-height: 1rem;
+}
