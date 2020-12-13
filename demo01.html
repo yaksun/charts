@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #bar01{
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+            border:1px solid green;
+        }
+    </style>
+</head>
+<body>
+    <div id="bar01"></div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-rc.1/echarts.min.js"></script>
+    <script>
+        window.onload = function(){
+            var xColor=['#1089E7','#F57474','#56D0E3','#F8B448','#8B78F6']
+            var myCharts = echarts.init(document.querySelector('#bar01'))
+            var option={
+                grid: {
+                    top:'10px',
+                    left: '1%',
+                    right: '6%',
+                    bottom: '5%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01],
+                    // inverse:true,
+                    // 分隔线
+                    splitLine:{
+                        show:false
+                    },
+                    // 坐标轴
+                    axisLine:{
+                        show:false
+                    },
+                    // 隐藏文字
+                    axisLabel:{
+                        show:false 
+                    },
+                    // 隐藏刻度
+                    axisTick:{
+                        show:false 
+                    }
+                },
+                yAxis: [
+                        {
+                            type: 'category',
+                            inverse:true,
+                            // inverse:true,
+                            data: ['巴西', '印尼', '美国', '印度', '中国'],
+                            axisLine:{
+                                show:false
+                            },
+                            axisTick:{
+                                show:false 
+                            }
+                        },
+                        {
+                              show:true,
+                            inverse:true,
+                            data: [102, 302, 230, 453, 333],
+                         
+                            axisLine:{
+                                show:false
+                            },
+                            axisTick:{
+                                show:false 
+                            }  
+                        }
+                ],
+                series: [
+                    {
+                        name: '条',
+                        type: 'bar',
+                        data: [76, 60, 45, 80, 23],
+                        itemStyle:{
+                            color:function(param){
+                                return xColor[param.dataIndex]
+                          
+                            },
+                            barBorderRadius:15
+                        },
+                        barCategoryGap:85,
+                        barwidth:10,
+                        label:{
+                            normal:{
+                                show:true,
+                                position:'inside',
+                                formatter:"{c}%"
+                            }
+                        },
+                        yAxisIndex:0
+
+                    },
+                    {
+                        name: '框',
+                        type: 'bar',
+                        barCategoryGap:50,
+                        barWidth:15,
+                        itemStyle:{
+                            color:"none",
+                            borderColor:"#00c1de",
+                            borderWidth:3,
+                            barBorderRadius:15
+                        },
+                        data: [100, 100, 100, 100, 100],
+                        yAxisIndex:1
+                    }
+                ]
+            }
+
+            myCharts.setOption(option)
+
+        }
+    </script>
+</body>
+</html>
