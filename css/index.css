@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+li {
+  list-style: none;
+}
 header {
   height: 1rem;
   background-color: pink;
@@ -33,13 +36,71 @@ header span {
 }
 .mainbox .column:nth-child(2) {
   flex: 5;
+  margin: 0 0.125rem 0.1875rem;
+}
+.mainbox .column:nth-child(2) .no {
+  border: 1px solid palegreen;
+  padding: 0.125rem 0.125rem 0;
+}
+.mainbox .column:nth-child(2) .no .no-td {
+  position: relative;
+  height: 1rem;
+  line-height: 1rem;
+}
+.mainbox .column:nth-child(2) .no .no-td::before {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 10px;
+  top: 0;
+  left: 0;
+  border-top: 2px solid red;
+  border-left: 2px solid red;
+}
+.mainbox .column:nth-child(2) .no .no-td::after {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 10px;
+  bottom: 0;
+  right: 0;
+  border-right: 2px solid red;
+  border-bottom: 2px solid red;
+}
+.mainbox .column:nth-child(2) .no .no-td ul {
+  display: flex;
+}
+.mainbox .column:nth-child(2) .no .no-td ul li {
+  flex: 1;
+  text-align: center;
+}
+.mainbox .column:nth-child(2) .no .no-td ul li:nth-child(1) {
+  position: relative;
+}
+.mainbox .column:nth-child(2) .no .no-td ul li:nth-child(1):after {
+  position: absolute;
+  content: "";
+  top: 25%;
+  height: 50%;
+  right: 0;
+  border-right: 1px solid goldenrod;
+}
+.mainbox .column:nth-child(2) .no .no-hd ul {
+  display: flex;
+}
+.mainbox .column:nth-child(2) .no .no-hd ul li {
+  flex: 1;
+  text-align: center;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  font-size: 0.25rem;
 }
 .mainbox .panel {
   position: relative;
   height: 3.875rem;
   background-color: aqua;
   margin-bottom: 0.1875rem;
-  padding: 0.1875rem 0.1875rem 0;
+  padding: 0.1875rem;
 }
 .mainbox .panel::before {
   position: absolute;
@@ -86,4 +147,20 @@ header span {
   right: 0;
   border-bottom: 2px solid green;
   border-right: 2px solid green;
+}
+.mainbox .panel .container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.mainbox .panel .container .title {
+  font-size: 0.25rem;
+  text-align: center;
+  height: 0.275rem;
+  line-height: 0.275rem;
+}
+.mainbox .panel .container .content {
+  flex: 1;
+  background-color: greenyellow;
 }

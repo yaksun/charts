@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+li{
+    list-style: none;
+}
 header{
     height: 1rem;
     background-color: pink;
@@ -33,13 +36,74 @@ header{
     }
     .column:nth-child(2){
         flex:5;
+        margin: 0 .125rem .1875rem;
+        .no{
+            border:1px solid palegreen;
+            padding:.125rem .125rem 0;
+            .no-td{
+                position: relative;
+                height: 1rem;
+                line-height: 1rem;
+                &::before{
+                    position: absolute;
+                    content: "";
+                    width: 30px;
+                    height: 10px;
+                    top:0;
+                    left: 0;
+                    border-top: 2px solid red;
+                    border-left: 2px solid red;
+                }
+                &::after{
+                    position: absolute;
+                    content: "";
+                    width: 30px;
+                    height: 10px;
+                    bottom:0;
+                    right: 0;
+                    border-right: 2px solid red;
+                    border-bottom: 2px solid red;
+                }
+                ul{
+                    display: flex;
+                    li{
+                        flex:1;
+                        text-align: center;
+                    }
+                    li:nth-child(1){
+                        position: relative;
+                        &:after{
+                            position: absolute;
+                            content: "";
+                            top:25%;
+                            height: 50%;
+                            right:0;
+                            border-right: 1px solid goldenrod;
+                        }
+                    }
+                }
+            }
+            .no-hd{
+                ul{
+                    display: flex;
+                    li{
+                        flex:1;
+                        text-align: center;
+                        height: .5rem;
+                        line-height: .5rem;
+                        font-size: .25rem;
+                    }
+                }
+            }
+          
+        }
     }
     .panel{
         position: relative;
         height: 3.875rem;
         background-color: aqua;
         margin-bottom: .1875rem;
-        padding: .1875rem .1875rem 0;
+        padding: .1875rem ;
         &::before{
             position: absolute;
             content: "";
@@ -84,6 +148,22 @@ header{
                 right: 0;
                 border-bottom: 2px solid green;
                 border-right: 2px solid green;
+            }
+        }
+        .container{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .title{
+                font-size: .25rem;
+                text-align: center;
+                height: .275rem;
+                line-height: .275rem;
+            }
+            .content{
+                flex:1;
+                background-color: greenyellow;
             }
         }
     }
