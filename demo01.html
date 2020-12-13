@@ -22,15 +22,15 @@
             var myCharts = echarts.init(document.querySelector('#bar01'))
             var option={
                 grid: {
-                    top:'10px',
-                    left: '1%',
-                    right: '6%',
+                    top:'20%',
+                    left: '2%',
+                    right: '2%',
                     bottom: '5%',
-                    containLabel: true
+                    containLabel: true,
+                    // show:true
                 },
                 xAxis: {
                     type: 'value',
-                    boundaryGap: [0, 0.01],
                     // inverse:true,
                     // 分隔线
                     splitLine:{
@@ -87,8 +87,8 @@
                             },
                             barBorderRadius:15
                         },
-                        barCategoryGap:85,
-                        barwidth:10,
+                        barCategoryGap:68,
+                        barwidth:15,
                         label:{
                             normal:{
                                 show:true,
