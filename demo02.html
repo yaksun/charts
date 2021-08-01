@@ -154,6 +154,155 @@
 
            myChart.setOption(option) 
 
+           myChart.on("legendselectchanged", (event) => {
+            handleChange(event)
+            });
+
+            window.myChart = myChart
+
+        }
+
+        function handleChange(event){
+          console.log(event);
+          var option = {
+            
+            tooltip: {
+                trigger: 'axis'
+            
+            },
+            legend: {
+              selected: {
+                  // 选中'系列1'
+                  '邮件营销': false,
+                  // 不选中'系列2'
+                  '联盟广告': true
+              }
+            },
+       
+            grid: {
+                top:'20%',
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true,
+                show:true,
+                borderColor:'pink'
+             
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                     // 坐标轴
+                     axisLine:{
+                        show:false
+                    },
+                    // 隐藏文字
+                    axisLabel:{
+                        show:false 
+                    },
+                    // 隐藏刻度
+                    axisTick:{
+                        show:false 
+                    },
+                    // 隐藏基线
+                    splitLine: {show: false},
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                     // 坐标轴
+                     // 隐藏文字
+                    axisLabel:{
+                        show:false 
+                    },
+                     axisLine:{
+                        show:false
+                    },
+                    // 隐藏刻度
+                    axisTick:{
+                        show:false 
+                    }
+                }
+            ],
+            series: [
+            {
+                    name: '邮件营销',
+                    type: 'line',
+                    smooth:true,
+                    symbol:'circle',
+                    symbolSize:12,
+                    showSymbol:false,
+                    itemStyle:{
+                        color:'#0184d5',
+                        borderColor:'rgba(221,220,107,.1)',
+                        borderWidth:12
+                    },
+                    areaStyle: {
+                       normal:{
+                           color:new echarts.graphic.LinearGradient(
+                               0,
+                               0,
+                               0,
+                               1,
+                                [
+                                    {
+                                        offset:0,
+                                        color:'rgba(0,216,135,0.4)'
+                                    },
+                                    {
+                                        offset:0.8,
+                                        color:"rgba(0,216,135,0.1)"
+                                    }
+                                ],
+                                false
+                           )
+                       }
+                    },
+                    data: []
+                },
+                {
+                    name: '联盟广告',
+                    type: 'line',
+                    symbol:'circle',
+                    showSymbol:false,
+                    symbolSize:12,
+                    itemStyle:{
+                        color:'green',
+                        borderColor:'rgba(221,220,107,.1)',
+                        borderWidth:12
+                    },
+                    smooth:true,
+                    areaStyle: {
+                        normal:{
+                           color:new echarts.graphic.LinearGradient(
+                               0,
+                               0,
+                               0,
+                               1,
+                                [
+                                    {
+                                        offset:0,
+                                        color:'rgba(0,216,135,0.4)'
+                                    },
+                                    {
+                                        offset:0.8,
+                                        color:"rgba(0,216,135,0.1)"
+                                    }
+                                ],
+                                false
+                           )
+                       }
+                    },
+                    data: [220, 182, 191, 234, 290, 330, 310]
+                }
+            ]
+            };
+
+          window.myChart.setOption(option,true)  
+
         }
     </script>
 </body>

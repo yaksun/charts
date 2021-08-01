@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			#school-building-chart {
+				width: 500px;
+				height: 500px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="school-building-chart"></div>
+		<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-rc.1/echarts.min.js"></script>
+		<script>
+			window.onload = function () {
+				let chart = echarts.init(
+					document.getElementById("school-building-chart")
+				);
+				let arr = [];
+				let datas = [];
+				for (var i = 0; i < data.chuzhong.length; i++) {
+					arr.push(Number(data.chuzhong[i]) + Number(data.xiaoxue[i]));
+				}
+				// let max = Math.max(...arr)
+				arr.forEach(function (item, index) {
+					datas.push({
+						value: item,
+					});
+				});
+				let option = {
+					tooltip: {
+						trigger: "axis",
+						axisPointer: {
+							// 坐标轴指示器，坐标轴触发有效
+							type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
+						},
+						formatter: function (params) {
+							let message = "";
+							params.forEach(function (item, index) {
+								if (item.seriesName !== "") {
+									message += item.seriesName + ":" + item.data + "<br>";
+								}
+							});
+							return message;
+						},
+					},
+					legend: {
+						show: true,
+						right: "5%",
+						top: "5%",
+						orient: "horizontal",
+						icon: "rect",
+						itemWidth: 10,
+						itemHeight: 10,
+						textStyle: {
+							fontSize: 14,
+							color: "#D1D1D1",
+						},
+					},
+					grid: {
+						top: "20%",
+						left: "5%",
+						right: "5%",
+						bottom: "5%",
+						containLabel: true,
+					},
+					xAxis: {
+						type: "category",
+						boundaryGap: true,
+						data: data.nian,
+						axisLine: {
+							lineStyle: {
+								color: "rgba(151,151,151,1)",
+							},
+							symbol: ["none", "arrow"],
+							symbolSize: [5, 10],
+							symbolOffset: [10, 8],
+						},
+						axisLabel: {
+							color: "#BEBEBE",
+							fontSize: 12,
+						},
+						axisTick: {
+							show: false,
+						},
+					},
+					yAxis: {
+						type: "value",
+						name: "所",
+						nameLocation: "end",
+						splitLine: {
+							show: false,
+						},
+						axisTick: {
+							show: false,
+							length: 10,
+							lineStyle: {
+								color: "#8896b3",
+							},
+						},
+						nameTextStyle: {
+							color: "#53CABE",
+							fontSize: 12,
+						},
+						axisLabel: {
+							color: "#BEBEBE",
+							fontSize: 12,
+						},
+						splitArea: {
+							show: false,
+						},
+						axisLine: {
+							lineStyle: {
+								color: "rgba(151,151,151,1)",
+							},
+							symbol: ["none", "arrow"],
+							symbolSize: [5, 10],
+							symbolOffset: [10, 8],
+						},
+					},
+					series: [
+						{
+							name: "初中",
+							type: "bar",
+							stack: "学校",
+							itemStyle: {
+								color: this.schoolBuildingColor[0],
+							},
+							barWidth: "15%",
+							barGap: "50%",
+							// 位置偏移
+							barCategoryGap: "5%",
+							data: data.chuzhong,
+							z: 2,
+						},
+						{
+							name: "小学",
+							type: "bar",
+							stack: "学校",
+							itemStyle: {
+								color: this.schoolBuildingColor[1],
+							},
+							barWidth: "15%",
+							barGap: "50%",
+							// 位置偏移
+							barCategoryGap: "5%",
+							data: data.xiaoxue,
+							z: 2,
+						},
+						{
+							name: "",
+							type: "bar",
+							barGap: "-100%",
+							barWidth: "15%",
+							z: 1,
+							itemStyle: {
+								color: "transparent",
+							},
+							label: {
+								normal: {
+									show: true,
+									position: "top",
+									textStyle: {
+										color: "#E6E6E6",
+										fontSize: 14,
+									},
+									formatter: "{c}",
+								},
+							},
+							data: datas,
+						},
+					],
+				};
+				chart.setOption(option);
+				// 处理legend点击事件
+				chart.on("legendselectchanged", function (obj) {
+					if (obj.name === "初中") {
+						if (
+							obj.selected["初中"] === false &&
+							obj.selected["小学"] === true
+						) {
+							option.series[2].data = data.xiaoxue;
+							option.series[1].data = data.xiaoxue;
+							option.series[0].data = [];
+							option.tooltip.show = true;
+							chart.setOption(option);
+						} else if (
+							obj.selected["初中"] === true &&
+							obj.selected["小学"] === false
+						) {
+							option.series[2].data = data.chuzhong;
+							option.series[1].data = [];
+							option.series[0].data = data.chuzhong;
+							option.tooltip.show = true;
+							chart.setOption(option);
+						} else if (
+							obj.selected["初中"] === false &&
+							obj.selected["小学"] === false
+						) {
+							// 如果“初中”和“小学”legend都没选中，则底层的柱数据不显示
+							option.series[2].data = [];
+							option.series[1].data = [];
+							option.series[0].data = [];
+							option.tooltip.show = false; // 没有数据不再显示toolTip
+							chart.setOption(option);
+						} else if (
+							obj.selected["初中"] === true &&
+							obj.selected["小学"] === true
+						) {
+							option.series[2].data = datas;
+							option.series[1].data = data.xiaoxue;
+							option.series[0].data = data.chuzhong;
+							option.tooltip.show = true;
+							chart.setOption(option);
+						}
+					} else if (obj.name === "小学") {
+						if (
+							obj.selected["小学"] === false &&
+							obj.selected["初中"] === true
+						) {
+							option.series[2].data = data.chuzhong;
+							option.series[1].data = [];
+							option.series[0].data = data.chuzhong;
+							option.tooltip.show = true;
+							chart.setOption(option);
+						} else if (
+							obj.selected["小学"] === true &&
+							obj.selected["初中"] === false
+						) {
+							option.series[2].data = data.xiaoxue;
+							option.series[1].data = data.xiaoxue;
+							option.series[0].data = [];
+							option.tooltip.show = true;
+							chart.setOption(option);
+						} else if (
+							obj.selected["初中"] === false &&
+							obj.selected["小学"] === false
+						) {
+							// 如果“初中”和“小学”legend都没选中，则底层的柱数据不显示
+							option.series[2].data = [];
+							option.series[1].data = [];
+							option.series[0].data = [];
+							option.tooltip.show = false; // 没有数据不再显示toolTip
+							chart.setOption(option);
+						} else if (
+							obj.selected["小学"] === true &&
+							obj.selected["初中"] === true
+						) {
+							option.series[2].data = datas;
+							option.series[1].data = data.chuzhong;
+							option.series[0].data = data.xiaoxue;
+							option.tooltip.show = true;
+							chart.setOption(option);
+						}
+					}
+				});
+			};
+		</script>
+	</body>
+</html>
